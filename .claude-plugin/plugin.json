@@ -1,0 +1,18 @@
+{
+  "name": "qadvisor",
+  "version": "1.0.0",
+  "description": "A 17-master AI advisory board for Claude Code — smart routing, parallel consultation, forced debate, synthesized reports.",
+  "author": {
+    "name": "wolfqing"
+  },
+  "homepage": "https://github.com/wolfqing/QadvisorSkills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "advisory-board",
+    "decision-making",
+    "strategy",
+    "startup",
+    "product"
+  ]
+}

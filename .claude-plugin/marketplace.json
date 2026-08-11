@@ -1,0 +1,13 @@
+{
+  "name": "qadvisor",
+  "owner": {
+    "name": "wolfqing"
+  },
+  "plugins": [
+    {
+      "name": "qadvisor",
+      "source": "./",
+      "description": "17 legendary advisors that debate your business decisions — routing, parallel consultation, conflict debate, and a synthesized report."
+    }
+  ]
+}
