@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Skills and plugin manifest
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      # Generated advisor copies are fresh, frontmatter is valid, and the
+      # dispatcher references every advisor. Pure bash, no network.
+      - name: Check skills (scripts/build.sh check)
+        run: bash scripts/build.sh check
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # `claude plugin validate` is an offline schema check: it needs no login
+      # or API key. The CLI version is pinned so new validator rules cannot turn
+      # CI red without a code change; bump it deliberately.
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code@2.1.288
+
+      - name: Validate plugin and marketplace manifests
+        env:
+          DISABLE_AUTOUPDATER: "1"
+        run: |
+          claude plugin validate .
+          claude plugin validate .claude-plugin/plugin.json

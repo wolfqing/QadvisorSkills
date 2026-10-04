@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Qadvisor banner</title>
+<style>
+  :root {
+    --bench: #12382b;
+    --felt: #0c2a20;
+    --brass: #c8a25b;
+    --ivory: #f2ecdd;
+    --aye: #9fd09a;
+    --wary: #e8bd55;
+    --nay: #ef7d6b;
+    --serif: "Baskerville", ui-serif, "New York", Georgia, "PingFang SC", serif;
+    --sans: "Avenir Next", ui-sans-serif, "SF Pro Display", "Helvetica Neue", "PingFang SC", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 640px; overflow: hidden; }
+  body {
+    background: var(--bench);
+    color: var(--ivory);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  /* The table, seen from above: a stadium with a brass inlay */
+  .table {
+    position: absolute;
+    left: 232px; top: 140px;
+    width: 816px; height: 338px;
+    border-radius: 169px;
+    background: var(--felt);
+    box-shadow:
+      inset 0 0 0 2px var(--brass),
+      inset 0 0 0 10px var(--felt),
+      inset 0 0 0 11px rgba(200,162,91,.42);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .mark {
+    font-family: var(--serif);
+    font-size: 36px; font-weight: 600;
+    letter-spacing: .06em;
+    color: var(--brass);
+    line-height: 1;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 66px; line-height: 1.04;
+    letter-spacing: -0.01em;
+  }
+  .sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 31px; font-weight: 600;
+    color: var(--brass);
+    margin-top: 18px;
+    line-height: 1;
+  }
+
+  /* Seats */
+  .row {
+    position: absolute; left: 196px; right: 196px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .row.top { top: 92px; }
+  .row.bottom { top: 496px; }
+  .end {
+    position: absolute; top: 260px;
+    display: flex; flex-direction: column; gap: 46px;
+  }
+  .end.left { right: calc(1280px - 214px); align-items: flex-end; }
+  .end.right { left: 1066px; align-items: flex-start; }
+
+  .seat {
+    font-size: 19px; font-weight: 600;
+    line-height: 26px;
+    white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .v { font-size: 15px; font-weight: 700; width: 12px; text-align: center; }
+  .v.aye { color: var(--aye); }
+  .v.wary { color: var(--wary); }
+  .v.nay { color: var(--nay); }
+
+  footer {
+    position: absolute; left: 0; right: 0; top: 562px;
+    text-align: center;
+    font-size: 16px; font-weight: 500;
+    letter-spacing: .02em;
+    color: rgba(242,236,221,.62);
+  }
+</style>
+</head>
+<body>
+  <div class="row top">
+    <span class="seat">Munger <span class="v nay">✕</span></span>
+    <span class="seat">Buffett <span class="v aye">✓</span></span>
+    <span class="seat">Drucker <span class="v aye">✓</span></span>
+    <span class="seat">Helmer <span class="v wary">!</span></span>
+    <span class="seat">Christensen <span class="v aye">✓</span></span>
+    <span class="seat">Sun Tzu <span class="v wary">!</span></span>
+    <span class="seat">Kenya Hara <span class="v aye">✓</span></span>
+  </div>
+
+  <div class="end left">
+    <span class="seat">Jobs <span class="v nay">✕</span></span>
+    <span class="seat">Eyal <span class="v wary">!</span></span>
+  </div>
+
+  <div class="table">
+    <div class="mark">Qadvisor</div>
+    <h1>17 legendary minds.<br>One boardroom.</h1>
+    <p class="sub">They don’t just answer — they argue.</p>
+  </div>
+
+  <div class="end right">
+    <span class="seat">Musk <span class="v nay">✕</span></span>
+    <span class="seat">Godin <span class="v aye">✓</span></span>
+  </div>
+
+  <div class="row bottom">
+    <span class="seat">Kahneman <span class="v wary">!</span></span>
+    <span class="seat">Karpathy <span class="v aye">✓</span></span>
+    <span class="seat">Andrew Chen <span class="v aye">✓</span></span>
+    <span class="seat">Donald Miller <span class="v aye">✓</span></span>
+    <span class="seat">George Lois <span class="v nay">✕</span></span>
+    <span class="seat">Paul Graham <span class="v wary">!</span></span>
+  </div>
+
+  <footer>AI advisory board · Claude Code · claude.ai · any agent</footer>
+</body>
+</html>

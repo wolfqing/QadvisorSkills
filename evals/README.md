@@ -1,47 +1,71 @@
 # Evals
 
-Persona prompts are easy to write and hard to make good. This directory holds the eval
-suites and optimization logs that keep Qadvisor's advisors honest.
+This suite answers one question: **does installing Qadvisor beat asking Claude to "think
+like Munger"?**
 
-## Methodology
+It uses Claude Code's built-in eval runner, [`claude plugin eval`](https://code.claude.com/docs/en/plugin-evals),
+which needs Claude Code v2.1.269 or later. Each case starts a fresh, isolated session, sends a
+realistic prompt and scores the reply with graders. By default every case runs in two arms:
 
-Inspired by Karpathy-style "autoresearch" hill-climbing:
+| Column | Meaning |
+|--------|---------|
+| **WITH** | Score with the Qadvisor plugin loaded. Natural phrasing such as "what would Munger say…" routes through the `qadvisor` dispatcher. |
+| **W/OUT** | Score for the same prompt with no plugin: plain Claude asked to channel the advisor. |
+| **Δ** | WITH minus W/OUT, which is what the plugin adds. |
 
-1. **Test inputs**: 5 hard, realistic questions from the advisor's decision domain
-2. **Binary criteria**: each output is judged pass/fail on 5 dimensions:
-   - **Concise** — within the output cap (600 words / ≈600 CJK characters)
-   - **Deep framework application** — tools applied with situational insight, not name-dropped
-   - **Quantitative reasoning** — ≥3 specific numbers (probabilities, amounts, timeframes, ratios)
-   - **Voice** — the advisor's signature bluntness/style is present
-   - **Challenges assumptions** — reframes the question or attacks an implicit premise
-3. **Score**: 5 inputs × 5 criteria = 25 points per experiment
-4. **Hill-climb**: mutate the SKILL.md, re-run, keep the change only if the score improves
-5. **Log everything**: every experiment goes in `changelog.md`; scores in `results.tsv`
+`tool_used: Skill` graders only report whether the skill fired. They are left out of the
+score in two-arm runs so that they do not inflate Δ.
 
-## Results so far
+## Cases
 
-| Advisor | Baseline | Current | Log |
-|---------|----------|---------|-----|
-| munger | 18/25 (72%) | 25/25 (100%) | [munger/](munger/) |
-| the other 16 | — | not yet evaluated | **open work — PRs welcome** |
+| Case | Tags | What it checks | Runs |
+|------|------|----------------|------|
+| `munger/quit-job` | munger, single-advisor | Quitting a $140k job for a $2k-MRR side project | 3 |
+| `munger/price-war` | munger, single-advisor | Whether to match a competitor's 50% price cut | 3 |
+| `munger/term-sheet` | munger, single-advisor | $3M for 30% with a 2x liquidation preference | 3 |
+| `munger/market-pivot` | munger, single-advisor | Pivoting from US/EU revenue to a viral China spike | 3 |
+| `munger/big-client` | munger, single-advisor | A $400k custom-feature client that would derail the roadmap | 3 |
+| `board/price-war-en` | board, expensive | Standard board run ("board this"): at least 3 independent advisor subagents, ✅/⚠️/❌ verdicts, a reframed question, named perspectives with agreement and disagreement, concrete next steps | 2 |
+| `board/roadmap-zh` | board, expensive | Standard board run in Chinese ("顾问团"): Chinese report, verdict marks, clear recommendation, next steps | 2 |
+| `board/debate-munger-musk` | debate, expensive | Forced debate: both sides engage each other's arguments and reach a clear outcome | 1 |
+| `trigger/no-trigger-coding` | trigger | An unrelated coding request must **not** invoke the board (scored in both arms) | 2 |
 
-The Munger run is the reference: the baseline failed all 5 conciseness checks (1000-1500 word
-consultant reports) and 2/5 quantification checks. Adding a hard 600-word cap, per-section
-sentence caps, and a ≥3-numbers requirement took it to 25/25. Those two constraints are now
-standard across all 17 advisors — but only Munger's have been *verified*. Running the same
-loop on the other advisors is the highest-value contribution you can make.
+Every Munger case uses the same five graders, carried over from the
+[legacy criteria](history/):
 
-## Directory layout
+- **concise**: 800 words or fewer (the advisor cap is 600; the grader keeps the legacy 800-word bar as headroom for headings and assumption lines)
+- **framework-depth**: at least 3 mental models, each applied to this situation's facts
+- **quantitative**: at least 3 numbers the advisor works out itself
+- **voice-and-verdict**: blunt, with a clear verdict
+- **challenges-assumptions**: questions at least one premise of the question
 
+## Run it
+
+Run these from the repository root. They call the model on your account; the `expensive`
+cases run many subagents.
+
+```bash
+# Full suite, two arms, pinned models
+claude plugin eval . --trust-plugin --model sonnet --judge-model sonnet -j 4
+
+# Quick iteration on the Munger cases: one arm, one run
+claude plugin eval . --tag munger --runs 1 --ablation none
+
+# Cheaper subset: Munger and trigger cases, with the baseline
+claude plugin eval . --tag munger trigger
 ```
-evals/
-  README.md            ← you are here
-  review-ui.html       ← standalone review interface for scoring outputs
-                          (loads fonts/XLSX from CDN — needs network)
-  munger/
-    SKILL.md.baseline  ← the pre-optimization skill, for reproduction
-    changelog.md       ← every experiment: change, score, result
-    results.tsv        ← machine-readable scores
-```
 
-To evaluate a new advisor, create `evals/{id}/` with the same three files.
+Results go to `evals/results/<timestamp>/`, which holds `report.html` and
+`aggregate-result.json`. That directory is gitignored. Without `--judge-model`, the judge is
+Haiku. Pin `sonnet` for scores you plan to publish.
+
+## Results
+
+<!-- EVAL-RESULTS:START -->
+_Results pending._
+<!-- EVAL-RESULTS:END -->
+
+## History
+
+[history/](history/) holds the original hand-run "autoresearch" loop that took the Munger
+skill from 18/25 to 25/25. This suite replaces it.

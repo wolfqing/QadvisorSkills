@@ -1,13 +1,17 @@
 {
   "name": "qadvisor",
   "owner": {
-    "name": "wolfqing"
+    "name": "wolfqing",
+    "url": "https://github.com/wolfqing"
+  },
+  "metadata": {
+    "description": "Qadvisor: an AI advisory board for Claude. 17 legendary minds reframe your question, consult in parallel, debate their disagreements, and hand you a verdict report."
   },
   "plugins": [
     {
       "name": "qadvisor",
       "source": "./",
-      "description": "17 legendary advisors that debate your business decisions — routing, parallel consultation, conflict debate, and a synthesized report."
+      "description": "An AI advisory board for Claude: 17 legendary minds reframe your question, consult in parallel, debate their disagreements, and hand you a verdict report."
     }
   ]
 }
