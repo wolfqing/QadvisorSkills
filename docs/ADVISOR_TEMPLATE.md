@@ -124,7 +124,7 @@ count as numbers, e.g. "a stranger names the product's purpose within 5 seconds"
 
 **Wiring and build**
 - [ ] In `skills/qadvisor/SKILL.md`: a board-table row with the "Also known as" names and
-      `[advisors/{id}.md](advisors/{id}.md)`, a question-type routing entry, and the surname
+      `[{id}.md](advisors/{id}.md)`, a question-type routing entry, and the surname
       added to the description (which must stay at or under 1000 characters; `check` fails
       above that)
 - [ ] `bash scripts/build.sh` generated `skills/qadvisor/advisors/{id}.md` (never edit it by

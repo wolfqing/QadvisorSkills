@@ -15,8 +15,10 @@ essays, interviews, lectures, and shareholder letters.
   **not** professional, legal, medical, financial, or investment advice. In particular,
   nothing produced by the Buffett or Munger advisors is a recommendation to buy or sell any
   security.
-- The maintainers will promptly address takedown requests from any represented individual
-  or their representatives.
+- The maintainers will address name-use or takedown requests from any represented individual
+  or their representatives within 7 days. Open a request with the
+  [name-use request template](https://github.com/wolfqing/QadvisorSkills/issues/new?template=name-use-request.md); if you prefer not to post publicly, open an issue asking
+  for a private contact and the maintainer will reach out.
 
 **中文**
 
@@ -28,4 +30,5 @@ Andrew Chen、Nir Eyal、原研哉等）是对公开来源（书籍、文章、�
 - 使用人名仅为标识每个技能试图建模的思想流派，属评论与教育性质。
 - 所有输出均为 AI 生成的分析，仅供头脑风暴与学习，**不构成**专业、法律、医疗、财务或
   投资建议。特别地，巴菲特/芒格顾问的任何输出都不构成任何证券的买卖建议。
-- 如相关人物或其代表提出下架请求，维护者将及时处理。
+- 如相关人物或其代表提出姓名使用或下架请求，维护者将在 7 天内处理。请通过
+  [姓名使用请求模板](https://github.com/wolfqing/QadvisorSkills/issues/new?template=name-use-request.md)提交；如不便公开，可先开一个 issue 说明需要私下联系，维护者会主动联系你。

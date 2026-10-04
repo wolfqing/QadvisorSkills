@@ -1,7 +1,7 @@
 {
   "name": "qadvisor",
   "version": "1.1.0",
-  "description": "An AI advisory board for Claude: 17 legendary minds reframe your question, consult in parallel, debate their disagreements, and hand you a verdict report.",
+  "description": "An AI advisory board for Claude built on 17 documented thinking frameworks (Munger, Buffett, Jobs, Sun Tzu, Paul Graham, Karpathy and more): it reframes your question, consults the advisors in parallel, makes them debate disagreements, and hands you a verdict report.",
   "author": {
     "name": "wolfqing",
     "url": "https://github.com/wolfqing"

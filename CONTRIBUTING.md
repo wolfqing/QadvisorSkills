@@ -76,7 +76,7 @@ Make three edits in `skills/qadvisor/SKILL.md`:
 1. **Board table**: add a row in the right layer. The "Also known as" column lists every name
    the dispatcher should match: the full name, the Chinese name and any short form, as in
    `Paul Graham, PG, 保罗·格雷厄姆`. The last column is the framework link
-   `[advisors/{id}.md](advisors/{id}.md)`.
+   `[{id}.md](advisors/{id}.md)`.
 2. **Question-type routing table (Step 3b)**: add the advisor to the question types it serves.
    If it introduces a routing distinction, note it there. For example, helmer diagnoses which
    powers exist and sunzi decides how to fight.
@@ -84,8 +84,10 @@ Make three edits in `skills/qadvisor/SKILL.md`:
    would Tufte say…" reaches the board. Use the full name where the surname alone is ambiguous.
    The description must stay at or under 1000 characters, and `check` enforces that limit.
 
-Also update the advisor count ("17") in the dispatcher, both READMEs and
-`.claude-plugin/*.json`.
+Also update the advisor count ("17") everywhere it appears: the dispatcher, both READMEs,
+`.claude-plugin/*.json`, the `scripts/build.sh` header and the banner (`docs/assets/banner.html`,
+then re-render the PNGs). `grep -rniE '\b17\b|seventeen' --include='*.md' --include='*.json' --include='*.html' .`
+finds them.
 
 ### 4. Build and check
 

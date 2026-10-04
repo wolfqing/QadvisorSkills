@@ -62,7 +62,29 @@ Haiku. Pin `sonnet` for scores you plan to publish.
 ## Results
 
 <!-- EVAL-RESULTS:START -->
-_Results pending._
+| Case | With Qadvisor | Plain Claude | Δ | What plain Claude missed |
+|---|---|---|---|---|
+| Board, English (price war) | 1.00 | 0.10 | **+0.90** | No reframed question, no ✅/⚠️/❌ marks, no independent advisors, no named perspectives; vague next steps in 1 of 2 runs |
+| Board, Chinese (big-client deal) | 1.00 | 0.50 | **+0.50** | No ✅/⚠️/❌ marks, no independent advisors |
+| Debate: Munger vs Musk (1 run) | 1.00 | 0.67 | **+0.33** | Wrote both sides itself instead of running two independent advisors |
+| Munger: market pivot | 1.00 | 0.80 | +0.20 | Fewer than 3 self-derived figures in all 3 runs (left kill thresholds as "X%") |
+| Munger: big client | 1.00 | 0.93 | +0.07 | Fewer than 3 self-derived figures in 1 of 3 runs |
+| Munger: price war | 1.00 | 0.93 | +0.07 | Fewer than 3 self-derived figures in 1 of 3 runs |
+| Munger: quit job, term sheet | 1.00 | 1.00 | 0.00 | Nothing |
+| Must not trigger (coding request) | 1.00 | 1.00 | 0.00 | Board invoked 0 times |
+
+**What this says.** Be careful with the board numbers: part of the Δ comes from graders that
+check Qadvisor's own mechanics (independent subagents, ✅/⚠️/❌ marks), which plain Claude can't
+pass without copying the format. Only the English board case also shows a gap on judged quality
+(plain Claude didn't reframe the question or attribute positions to distinct named advisors); in
+the Chinese and debate cases plain Claude passed every judged quality rubric. What plain Claude
+can't do in one reply is keep the advisors independent of each other, and that is the bet
+Qadvisor makes. On single-advisor questions Sonnet already does a credible Munger (0.93 vs 1.00);
+the consistent gap is working out its own numbers. The graders are ours, so read them before
+trusting any number; harder quality graders and outcome-based evals are open work. The
+dispatcher fired in 20 of 20 runs that should trigger it and 0 of 2 that shouldn't.
+
+Run on 2026-10-04 (UTC) with Claude Code 2.1.288, Claude Sonnet as both agent and judge: 44 runs, 7 minutes with `-j 4`, about $11 at API list prices ($7.89 for the runs, $3.50 for the judge).
 <!-- EVAL-RESULTS:END -->
 
 ## History

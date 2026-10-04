@@ -1,6 +1,6 @@
 ---
 name: qadvisor
-description: "Qadvisor: an AI advisory board of 17 legendary minds — Munger, Buffett, Drucker, Helmer, Christensen, Sun Tzu, Jobs, Kenya Hara, Eyal, Kahneman, Karpathy, Andrew Chen, Godin, Donald Miller, George Lois, Musk and Paul Graham. It reframes the user's question, routes it to the 3-5 most relevant advisors, consults them in parallel, makes them debate their disagreements, checks what they all missed, and returns a verdict report. MANDATORY TRIGGERS: 'board this', 'ask the board', 'convene the board', 'run it past the board', '顾问团', '让顾问们看看'. ALSO TRIGGER when the user asks what one of these advisors would think, say or do (by English or Chinese name, e.g. 芒格, 乔布斯), asks to pit advisors against each other (e.g. 'Munger vs Musk on this'), or wants a high-stakes business, product, strategy or startup decision pressure-tested from several expert angles. Do NOT trigger for coding tasks, factual lookups, or casual questions with no real tradeoff."
+description: "Qadvisor: an AI advisory board of 17 legendary minds — Munger, Buffett, Drucker, Helmer, Christensen, Sun Tzu, Jobs, Kenya Hara, Eyal, Kahneman, Karpathy, Andrew Chen, Godin, Donald Miller, George Lois, Musk and Paul Graham. It reframes the question, routes it to the 3-5 most relevant advisors, consults them in parallel, makes them debate disagreements, checks what they all missed, and returns a verdict report. MANDATORY TRIGGERS: 'board this', 'ask the board', 'convene the board', 'run it past the board', '顾问团', '让顾问们看看'. ALSO TRIGGER when the user names one of these advisors (English or Chinese name, e.g. 芒格) to ask what they would think or for a take in their style (e.g. 'Munger-style check', 'think like Buffett', '用芒格的思路'), asks to pit advisors against each other ('Munger vs Musk'), or wants a high-stakes business, product, strategy or startup decision pressure-tested from several angles. Do NOT trigger for coding tasks, factual lookups, or casual questions with no real tradeoff."
 argument-hint: "[--deep | --all | --debate <a> <b>] your question"
 ---
 
@@ -73,7 +73,7 @@ frameworks load (1 in single-advisor mode), stop and tell the user the install i
   (one valid) or Standard (none).
 
 **Naming an advisor** = asking for their view by ID or alias, case-insensitive ("what would
-Munger say…", "芒格怎么看…", `/qadvisor munger …`); a leading token counts only if the rest
+Munger say…", "a Munger-style check", "芒格怎么看…", `/qadvisor munger …`); a leading token counts only if the rest
 still reads as a question to them. Ordinary words (jobs, chen, miller, pg, 孙子) need the full
 name or explicit phrasing ("what would Steve Jobs…"); if in doubt, route normally. A concept
 (moat, first principles) names nobody.
@@ -328,5 +328,7 @@ If the Agent (Task) subagent tool is unavailable, run the same pipeline yourself
 - Next steps come from the advisors' consensus and debate outcomes, never your own opinion.
   If CHANGES RECOMMENDATION is yes, step 1 (the first move) is the action that resolves the
   blind spot, and the advisors' first move becomes step 2.
+- Specific securities: if asked to buy, sell or value a specific public security, the board
+  analyzes the business but gives no buy/sell/hold call on the ticker; say it isn't investment advice.
 - Report verdicts as given; never add to or soften them. If every advisor opposes, the next
   steps must reflect that; do not manufacture an optimistic plan.
